@@ -1,11 +1,7 @@
 const { resolve } = require('path');
 const { readFileSync } = require('fs');
-const { cpuUsage } = require('process');
 
-const input = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
-  .split('\n\n');
-
-const requiredFields = {
+const validators = {
   byr: value => {
     const realValue = +value;
     return realValue >= 1920 && realValue <= 2002;
@@ -21,13 +17,16 @@ const requiredFields = {
   hgt: value => {
     const matched = value.match(/^(\d+)(in|cm)$/);
     if (null === matched) return false;
-    const [, size, unit] = matched;
+    const [, sizeStr, unit] = matched;
+    const size = +sizeStr;
+
     if (unit === 'cm') {
-      return +size >= 150 && +size <= 193;
+      return size >= 150 && size <= 193;
     }
     if (unit === 'in') {
-      return +size >= 59 && +size <= 76;
+      return size >= 59 && size <= 76;
     }
+
     return false;
   },
   hcl: value => !!value.match(/^#[a-f0-9]{6}$/),
@@ -35,25 +34,32 @@ const requiredFields = {
   pid: value => !!value.match(/^\d{9}$/),
 };
 
-const passports = input.map((passport) => {
-  const obj = {};
-  passport.split('\n').forEach((line) => {
-    line.split(' ').forEach(prop => {
-      const [key, value] = prop.split(':');
-      obj[key] = value;
-    });
-  });
-  return obj;
-});
+const passports = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
+  .split('\n\n')
+  // Passport can be split on multiple lines. Making it a single line
+  .map(passport => passport.split('\n').join(' '))
+  // Format each password to make it an object
+  .map(passport => passport.split(' ').reduce((acc, field) => {
+    const [key, value] = field.split(':');
+    acc[key] = value;
 
-const valid = passports.reduce((acc, passport) => {
-  const validProps = Object.entries(passport).reduce((validCount, [prop, value]) => {
-    if (requiredFields[prop]) {
-      validCount += +(requiredFields[prop](value))
+    return acc;
+  }, {}));
+
+const valid = passports.reduce((validCount, passport) => {
+  const validFieldsCount = Object.entries(passport).reduce((validatedFields, [field, value]) => {
+    if (validators[field]) {
+      validatedFields += +validators[field](value);
     }
-    return validCount;
+
+    return validatedFields;
   }, 0);
-  return acc + +(validProps >= 7);
+
+  if (validFieldsCount >= 7) {
+    validCount++;
+  }
+
+  return validCount;
 }, 0);
 
 console.log(valid);
