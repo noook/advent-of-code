@@ -32,6 +32,7 @@ const validators = {
   hcl: value => !!value.match(/^#[a-f0-9]{6}$/),
   ecl: value => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(value),
   pid: value => !!value.match(/^\d{9}$/),
+  cid: value => false,
 };
 
 const passports = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
@@ -48,11 +49,7 @@ const passports = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
 
 const valid = passports.reduce((validCount, passport) => {
   const validFieldsCount = Object.entries(passport).reduce((validatedFields, [field, value]) => {
-    if (validators[field]) {
-      validatedFields += +validators[field](value);
-    }
-
-    return validatedFields;
+    return validatedFields + +validators[field](value);
   }, 0);
 
   if (validFieldsCount >= 7) {
