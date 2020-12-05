@@ -16,6 +16,8 @@ const validators = {
   },
   hgt: value => {
     const matched = value.match(/^(\d+)(in|cm)$/);
+    // If the regex doesn't match, it is false.
+    // Prevents the script from crashing on the next line when trying to destruct non interable value `null`
     if (null === matched) return false;
     const [, sizeStr, unit] = matched;
     const size = +sizeStr;
@@ -29,10 +31,12 @@ const validators = {
 
     return false;
   },
+  // The two following regex should be length aware to prevent character noise before or after the match.
+  // Can be explicitly set by matching the beginning and of the line with ^ and $ tokens.
   hcl: value => !!value.match(/^#[a-f0-9]{6}$/),
-  ecl: value => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(value),
   pid: value => !!value.match(/^\d{9}$/),
-  cid: value => false,
+  ecl: value => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(value),
+  cid: value => false, // Don't count cid in the valid fields count
 };
 
 const passports = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
@@ -49,6 +53,7 @@ const passports = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
 
 const valid = passports.reduce((validCount, passport) => {
   const validFieldsCount = Object.entries(passport).reduce((validatedFields, [field, value]) => {
+    // Here we reach the field validator through the mapper defined over
     return validatedFields + +validators[field](value);
   }, 0);
 
