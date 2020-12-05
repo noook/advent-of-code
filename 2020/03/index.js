@@ -14,7 +14,7 @@ const patterns = [
   [1, 2],
 ];
 
-const [firstTree, ...encounteredTrees] = patterns.reduce((acc, [right, down]) => {
+const [firstTree, ...encounteredTrees] = patterns.map(([right, down]) => {
   let trees = 0;
 
   for (let i = 0, j = 0; i < input.length; i += down, j += right) {
@@ -24,10 +24,8 @@ const [firstTree, ...encounteredTrees] = patterns.reduce((acc, [right, down]) =>
     }
   }
 
-  acc.push(trees)
-
-  return acc;
-}, []);
+  return trees;
+});
 
 const total = encounteredTrees.reduce((acc, value) => acc * value, firstTree);
 
