@@ -33,7 +33,8 @@ for (let i = 0; i < list.length - 1; i += 1) {
 
 const paths = {};
 
-function createPath(item, count = 0) {
+function createPath(item) {
+  let count = 0
   if (!nextOptions[item]?.length) return 1;
 
   if (paths[item]) return paths[item];

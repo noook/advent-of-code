@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 const { readFileSync } = require('fs');
-const { dir } = require('console');
 
 let rows = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
   .split('\n');
