@@ -1,4 +1,4 @@
-const { resolve, posix } = require('path');
+const { resolve } = require('path');
 const { readFileSync } = require('fs');
 
 let input = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')

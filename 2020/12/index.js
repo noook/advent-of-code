@@ -93,7 +93,6 @@ const boat2 = {
 for (const step of input) {
   moves1[step.direction](boat, step.value)
   moves2[step.direction](boat2, step.value);
-  // console.log({ step, boat2 });
 }
 
 console.log('Part 1:', Math.abs(boat.x) + Math.abs(boat.y));
