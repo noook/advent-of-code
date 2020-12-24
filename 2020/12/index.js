@@ -8,6 +8,8 @@ let input = readFileSync(resolve(__dirname, 'input.txt'), 'utf-8')
     value: +el.substr(1),
   }));
 
+console.log(input);
+
 const poles = ['N', 'E', 'S', 'W'];
 
 const moves1 = {
