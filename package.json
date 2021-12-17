@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ts-node": "ts-node"
+    "ts-node": "ts-node",
+    "debug": "node --inspect -r ts-node/register"
   },
   "repository": {
     "type": "git",
