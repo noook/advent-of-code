@@ -29,22 +29,22 @@ if (import.meta.vitest) {
       const challenge = new Day1(__dirname, 'example.input.txt');
       output(ctx.meta.name, challenge.solve());
       expect(challenge.solve()).toEqual(24000);
-    })
+    });
 
     test('Example 2', (ctx) => {
       const challenge = new Day1(__dirname, 'example.input.txt');
       output(ctx.meta.name, challenge.solve());
       expect(challenge.solve(3)).toEqual(45000);
-    })
+    });
 
     test('Challenge - 1', (ctx) => {
       const challenge = new Day1(__dirname, 'input.txt');
       output(ctx.meta.name, challenge.solve());
-    })
+    });
 
     test('Challenge - 2', (ctx) => {
       const challenge = new Day1(__dirname, 'input.txt');
       output(ctx.meta.name, challenge.solve(3));
-    })
-  })
+    });
+  });
 }
