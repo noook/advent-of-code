@@ -40,11 +40,13 @@ if (import.meta.vitest) {
     test('Challenge - 1', (ctx) => {
       const challenge = new Day1(__dirname, 'input.txt');
       output(ctx.meta.name, challenge.solve());
+      expect(challenge.solve()).toEqual(69528);
     });
 
     test('Challenge - 2', (ctx) => {
       const challenge = new Day1(__dirname, 'input.txt');
       output(ctx.meta.name, challenge.solve(3));
+      expect(challenge.solve(3)).toEqual(206152);
     });
   });
 }

@@ -28,14 +28,16 @@ if (import.meta.vitest) {
 
     test('Challenge - 1', (ctx) => {
       const challenge = new Day0(__dirname, 'input.txt');
-      // We can't predict the result, so we output it
       output(ctx.meta.name, challenge.solve());
+      // Only for refactoring purpose: enter the value you found and test your code still works
+      expect(challenge.solve()).toEqual(/* Replace expected value */ undefined);
     })
 
     test('Challenge - 2', (ctx) => {
       const challenge = new Day0(__dirname, 'input.txt');
-      // We can't predict the result, so we output it
       output(ctx.meta.name, challenge.solve());
+      // Only for refactoring purpose: enter the value you found and test your code still works
+      expect(challenge.solve()).toEqual(/* Replace expected value */ undefined);
     })
   })
 }
