@@ -11,10 +11,13 @@ class Day2 extends Challenge<[AnswerA, AnswerB][]> {
     return str.split('\n').map(line => line.split(' ') as [AnswerA, AnswerB]);
   }
 
-  private opponentMap: Record<AnswerA, Answer> = {
+  private choiceMap: Record<AnswerA | AnswerB, Answer> = {
     A: 'rock',
     B: 'paper',
     C: 'scissor',
+    X: 'rock',
+    Y: 'paper',
+    Z: 'scissor'
   };
 
   private options: Answer[] = ['rock', 'paper', 'scissor'];
@@ -29,15 +32,9 @@ class Day2 extends Challenge<[AnswerA, AnswerB][]> {
   }
 
   public solve() {
-    const output = this.input.reduce((score, round) => {
-      const [opponent, choice] = round;
-      const playerChoices: Record<AnswerB, Answer> = {
-        X: 'rock',
-        Y: 'paper',
-        Z: 'scissor'
-      };
-      const opponentAnswer = this.opponentMap[opponent];
-      const choiceAnswer = playerChoices[choice];
+    const output = this.input.reduce((score, [opponent, choice]) => {
+      const opponentAnswer = this.choiceMap[opponent];
+      const choiceAnswer = this.choiceMap[choice];
 
       switch (true) {
         // Draw
@@ -57,9 +54,8 @@ class Day2 extends Challenge<[AnswerA, AnswerB][]> {
     return output;
   }
   public solve2() {
-    const output = this.input.reduce((score, round) => {
-      const [opponent, strat] = round;
-      const opponentAnswer = this.opponentMap[opponent];
+    const output = this.input.reduce((score, [opponent, strat]) => {
+      const opponentAnswer = this.choiceMap[opponent];
       switch (strat) {
         case 'X': // Lose
           return score + this.getScore(this.getLoseOption(opponentAnswer))
