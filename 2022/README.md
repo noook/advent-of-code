@@ -8,8 +8,10 @@ npm i
 
 ## Running a day
 
+Simply run the following command, and it will run tests on the file that was saved.
+
 ```sh
-npm run dev <folder>
+npm run dev
 ```
 
 Example:
