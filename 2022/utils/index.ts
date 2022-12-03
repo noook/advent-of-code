@@ -19,3 +19,13 @@ export const sumReducer = (acc: number, item: number) => acc + item;
 export function sum(arr: number[]): number {
   return arr.reduce(sumReducer, 0);
 }
+
+export function chunk<T>(arr: T[], length: number): T[][] {
+  const chunks: T[][] = [];
+
+  for (let i = 0; i < arr.length; i += length) {
+    chunks.push(arr.slice(i, i + length));
+  }
+
+  return chunks;
+}
