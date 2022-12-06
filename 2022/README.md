@@ -14,11 +14,6 @@ Simply run the following command, and it will run tests on the file that was sav
 npm run dev
 ```
 
-Example:
-
-```sh
-npm run dev 01
-```
 
 You can copy the structure of the [Day 0](./00/) to complete the challenges.
 
