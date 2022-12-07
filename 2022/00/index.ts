@@ -21,18 +21,18 @@ if (import.meta.vitest) {
       expect(result).toEqual(/* Replace expected value */ undefined);
     })
 
-    test.skip('Example 2', (ctx) => {
-      const challenge = new Day0(__dirname, 'example.input.txt');
-      const result = challenge.solve();
-      output(ctx.meta.name, result);
-      // expect(result).toEqual(/* Replace expected value */);
-    })
-
     test.skip('Challenge - 1', (ctx) => {
       const challenge = new Day0(__dirname, 'input.txt');
       const result = challenge.solve();
       output(ctx.meta.name, result);
       // Only for refactoring purpose: enter the value you found and test your code still works
+      // expect(result).toEqual(/* Replace expected value */);
+    })
+
+    test.skip('Example 2', (ctx) => {
+      const challenge = new Day0(__dirname, 'example.input.txt');
+      const result = challenge.solve();
+      output(ctx.meta.name, result);
       // expect(result).toEqual(/* Replace expected value */);
     })
 
