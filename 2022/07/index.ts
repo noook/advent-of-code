@@ -22,7 +22,7 @@ function findBy<T, K extends keyof T>(arr: T[], property: K, value: T[K]) {
   return arr.find(item => item[property] === value);
 }
 
-function recursivePath(node: Folder, path: string[]): Folder | File {
+function recursivePath(node: Folder, path: string[]): Folder {
   const pathCopy = path.concat();
   if (pathCopy.length === 0) return node;
 
@@ -74,9 +74,7 @@ class Day7 extends Challenge<Folder> {
         }
 
         const node = recursivePath(tree, backtrack);
-        if (node.type === NodeType.FOLDER) {
-          node.nodes.push(folder);
-        }
+        node.nodes.push(folder);
       } else if ((fileMatch = instruction.match(/^(?<size>\d+)\s(?<file>.+)$/)) !== null) {
         const file: File = {
           type: NodeType.FILE,
@@ -84,9 +82,7 @@ class Day7 extends Challenge<Folder> {
           size: +(fileMatch.groups!.size),
         }
         const node = recursivePath(tree, backtrack);
-        if (node.type === NodeType.FOLDER) {
-          node.nodes.push(file);
-        }
+        node.nodes.push(file);
       }
     });
 
