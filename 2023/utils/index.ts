@@ -64,3 +64,7 @@ export function callAtCoords<T, R>(matrix: T[][], coords: Coords, callFn: (el: T
     callFn(matrix[y][x], coords, matrix);
   }
 };
+
+export function count<T>(arr: T[], filter: (item: T) => boolean): number {
+  return arr.filter(filter).length;
+}
