@@ -29,3 +29,38 @@ export function chunk<T>(arr: T[], length: number): T[][] {
 
   return chunks;
 }
+
+const hasProp = (obj: any, prop: keyof any) => {
+  if (!obj) return false;
+
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+export type Coords = [number, number];
+
+export function eachMatrix<T>(matrix: T[][], cb: (item: T, [x, y]: Coords) => void) {
+  matrix.forEach((row, y) => {
+    row.forEach((item, x) => {
+      cb(item, [x, y]);
+    })
+  })
+}
+
+export function eachSurrounding<T, R>(matrix: T[][], [x, y]: Coords, eachFn: (adj: T, coords: Coords) => R) {
+  callAtCoords(matrix, [x, y - 1], eachFn);
+  callAtCoords(matrix, [x + 1, y - 1], eachFn);
+  callAtCoords(matrix, [x + 1, y], eachFn);
+  callAtCoords(matrix, [x + 1, y + 1], eachFn);
+  callAtCoords(matrix, [x, y + 1], eachFn);
+  callAtCoords(matrix, [x - 1, y + 1], eachFn);
+  callAtCoords(matrix, [x - 1, y], eachFn);
+  callAtCoords(matrix, [x - 1, y - 1], eachFn);
+};
+
+export function callAtCoords<T, R>(matrix: T[][], coords: Coords, callFn: (el: T, coords: Coords, ref: T[][]) => R) {
+  const [x, y] = coords;
+
+  if (hasProp(matrix, y) && hasProp(matrix[y], x)) {
+    callFn(matrix[y][x], coords, matrix);
+  }
+};
