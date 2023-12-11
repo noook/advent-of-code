@@ -35,6 +35,7 @@ class Day0 extends Challenge<Input[]> {
       const count = cardTypes.get(card) ?? 0;
       cardTypes.set(card, count + 1);
     })
+    const counts = Array.from(cardTypes.values());
     
     const jokersCount = jokers ? cardTypes.get('J') ?? 0 : 0;
 
@@ -43,7 +44,6 @@ class Day0 extends Challenge<Input[]> {
     }
 
     if (cardTypes.size === 2) {
-      const counts = Array.from(cardTypes.values());
       if (counts.includes(4)) {
         if (jokersCount > 0) {
           return values.fiveOfAKind;
@@ -59,7 +59,6 @@ class Day0 extends Challenge<Input[]> {
     }
 
     if (cardTypes.size === 3) {
-      const counts = Array.from(cardTypes.values());
       if (counts.includes(3)) {
         if (jokersCount >= 1) {
           return values.fourOfAKind;

@@ -17,31 +17,29 @@ if (import.meta.vitest) {
     test('Example 1', (ctx) => {
       const challenge = new Day0(__dirname, 'example.input.txt');
       const result = challenge.solve();
-      output(ctx.meta.name, result);
-      expect(result).toEqual(/* Replace expected value */ undefined);
+      output(ctx.task.name, result);
+      expect(result).toEqual(undefined);
     })
 
     test.skip('Challenge - 1', (ctx) => {
       const challenge = new Day0(__dirname, 'input.txt');
       const result = challenge.solve();
-      output(ctx.meta.name, result);
-      // Only for refactoring purpose: enter the value you found and test your code still works
-      // expect(result).toEqual(/* Replace expected value */);
+      output(ctx.task.name, result);
+      expect(result).toEqual(undefined);
     })
 
     test.skip('Example 2', (ctx) => {
       const challenge = new Day0(__dirname, 'example.input.txt');
       const result = challenge.solve();
-      output(ctx.meta.name, result);
-      // expect(result).toEqual(/* Replace expected value */);
+      output(ctx.task.name, result);
+      expect(result).toEqual(undefined);
     })
 
     test.skip('Challenge - 2', (ctx) => {
       const challenge = new Day0(__dirname, 'input.txt');
       const result = challenge.solve();
-      output(ctx.meta.name, result);
-      // Only for refactoring purpose: enter the value you found and test your code still works
-      // expect(result).toEqual(/* Replace expected value */);
+      output(ctx.task.name, result);
+      expect(result).toEqual(undefined);
     })
   })
 }
